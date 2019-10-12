@@ -122,6 +122,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                          7)
 	TAGKEYS(                        XK_9,                          8)
 	{ MODKEY|ShiftMask,             XK_r,          self_restart,   {0} },
+	{ MODKEY,                       XK_o,      winview,        {0} },
 };
 
 /* button definitions */
