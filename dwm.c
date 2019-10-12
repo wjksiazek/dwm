@@ -703,8 +703,14 @@ createmon(void)
 		m->pertag->nmasters[i] = m->nmaster;
 		m->pertag->mfacts[i] = m->mfact;
 
-		m->pertag->ltidxs[i][0] = m->lt[0];
-		m->pertag->ltidxs[i][1] = m->lt[1];
+		if (i == 0){
+			m->pertag->ltidxs[i][0] = &layouts[4];
+			m->pertag->ltidxs[i][1] = &layouts[4];
+		}else{
+			m->pertag->ltidxs[i][0] = m->lt[0];
+			m->pertag->ltidxs[i][1] = m->lt[1];
+		}
+
 		m->pertag->sellts[i] = m->sellt;
 
 		m->pertag->showbars[i] = m->showbar;
