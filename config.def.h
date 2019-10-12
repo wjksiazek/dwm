@@ -96,11 +96,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_h,          incrgaps,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_l,          incrgaps,       {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_Return,     zoom,           {0} },
-	{ MODKEY,                       XK_Tab,        view,           {0} },
-	{ MODKEY,                       XK_Left,   viewtoleft,     {0} },
-	{ MODKEY,                       XK_Right,  viewtoright,    {0} },
-	{ MODKEY|ShiftMask,             XK_Left,   tagtoleft,      {0} },
-	{ MODKEY|ShiftMask,             XK_Right,  tagtoright,     {0} },
+	//{ MODKEY,                       XK_Tab,        view,           {0} },
 	{ MODKEY,                       XK_q,          killclient,     {0} },
 	{ MODKEY|ShiftMask,             XK_q,          quit,           {0} },
 	{ MODKEY,                       XK_t,          setlayout,      {.v = &layouts[0]} },
@@ -112,6 +108,10 @@ static Key keys[] = {
 	{ MODKEY,                       XK_0,          view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,          tag,            {.ui = ~0 } },
 	{ MODKEY|ControlMask,           XK_0,          defaultgaps,    {0} },
+	{ MODKEY|ShiftMask,             XK_Tab,        viewtoleft,     {0} },
+	{ MODKEY,                       XK_Tab,        viewtoright,    {0} },
+	{ MODKEY|ShiftMask,             XK_Left,       tagtoleft,      {0} },
+	{ MODKEY|ShiftMask,             XK_Right,      tagtoright,     {0} },
 	TAGKEYS(                        XK_1,                          0)
 	TAGKEYS(                        XK_2,                          1)
 	TAGKEYS(                        XK_3,                          2)
