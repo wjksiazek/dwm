@@ -4,10 +4,10 @@
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
-static const unsigned int gappih    = 10;       /* horiz inner gap between windows */
-static const unsigned int gappiv    = 10;       /* vert inner gap between windows */
-static const unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov    = 10;       /* vert outer gap between windows and screen edge */
+static const unsigned int gappih    = 0;       /* horiz inner gap between windows */
+static const unsigned int gappiv    = 0;       /* vert inner gap between windows */
+static const unsigned int gappoh    = 0;       /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov    = 0;       /* vert outer gap between windows and screen edge */
 static const int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -44,15 +44,13 @@ static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 
 #include "layouts.c"
-#include "fibonacci.c"
+
 static const Layout layouts[] = {
 	/* symbol     arrange function */
- 	{ "[\\]",      dwindle },
 	{ "[]=",      tile },    /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
+	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "HHH",      grid },
- 	{ "[@]",      spiral },
 	{ NULL,       NULL },
 };
 
@@ -87,8 +85,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period,     incnmaster,     {.i = -1 } },
 	{ MODKEY|ShiftMask,		XK_comma,      cyclelayout,    {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period,     cyclelayout,    {.i = +1 } },
-	//{ MODKEY,                       XK_comma,      focusmon,       {.i = -1 } },
-	//{ MODKEY,                       XK_period,     focusmon,       {.i = +1 } },
+	{ ShiftMask,                    XK_comma,      focusmon,       {.i = -1 } },
+	{ ShiftMask,                    XK_period,     focusmon,       {.i = +1 } },
 	{ MODKEY|ControlMask,           XK_comma,      tagmon,         {.i = -1 } },
 	{ MODKEY|ControlMask,           XK_period,     tagmon,         {.i = +1 } },
 	{ MODKEY,                       XK_h,          setmfact,       {.f = -0.05} },
@@ -100,8 +98,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_q,          killclient,     {0} },
 	{ MODKEY|ShiftMask,             XK_q,          quit,           {0} },
 	{ MODKEY,                       XK_t,          setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,          setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,          setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                       XK_f,          setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                       XK_m,          setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_g,          setlayout,      {.v = &layouts[3]} },
 	{ MODKEY,                       XK_space,      setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,      togglefloating, {0} },
@@ -110,8 +108,8 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,           XK_0,          defaultgaps,    {0} },
 	{ MODKEY|ShiftMask,             XK_Tab,        viewtoleft,     {0} },
 	{ MODKEY,                       XK_Tab,        viewtoright,    {0} },
-	{ MODKEY|ShiftMask,             XK_Left,       tagtoleft,      {0} },
-	{ MODKEY|ShiftMask,             XK_Right,      tagtoright,     {0} },
+	{ MODKEY,                       XK_Left,       tagtoleft,      {0} },
+	{ MODKEY,                       XK_Right,      tagtoright,     {0} },
 	TAGKEYS(                        XK_1,                          0)
 	TAGKEYS(                        XK_2,                          1)
 	TAGKEYS(                        XK_3,                          2)
@@ -122,7 +120,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                          7)
 	TAGKEYS(                        XK_9,                          8)
 	{ MODKEY|ShiftMask,             XK_r,          self_restart,   {0} },
-	{ MODKEY,                       XK_o,      winview,        {0} },
+	{ MODKEY,                       XK_o,          winview,        {0} },
 };
 
 /* button definitions */
