@@ -2425,22 +2425,31 @@ view(const Arg *arg)
 
 void
 viewtoleft(const Arg *arg) {
+	Arg a;
 	if(__builtin_popcount(selmon->tagset[selmon->seltags] & TAGMASK) == 1
 	&& selmon->tagset[selmon->seltags] > 1) {
-		Arg a;
 		a.ui = selmon->tagset[selmon->seltags] >> 1;
+		view(&a);
+	} else if(__builtin_popcount(selmon->tagset[selmon->seltags] & TAGMASK) == 1
+	&& selmon->tagset[selmon->seltags] == 1) {
+		a.ui = 1 << 8; //slect 9th tag
 		view(&a);
 	}
 }
 
 void
 viewtoright(const Arg *arg) {
+	Arg a;
 	if(__builtin_popcount(selmon->tagset[selmon->seltags] & TAGMASK) == 1
 	&& selmon->tagset[selmon->seltags] & (TAGMASK >> 1)) {
-		Arg a;
 		a.ui = selmon->tagset[selmon->seltags] << 1;
 		view(&a);
+	} else if(__builtin_popcount(selmon->tagset[selmon->seltags] & TAGMASK) == 1
+	&& !(selmon->tagset[selmon->seltags] & (TAGMASK >> 1))) {
+		a.ui = 1; //slect 9th tag
+		view(&a);
 	}
+
 }
 
 Client *
