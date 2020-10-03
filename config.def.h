@@ -35,8 +35,10 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor    scratch key */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1,        0  },
-	{ "firefox",  NULL,       NULL,       1 << 8,       0,           -1,        0  },
 	{ NULL,       NULL,   "scratchpad",   0,            1,           -1,       's' },
+	{ NULL,       NULL,   "vimwiki",      0,            1,           -1,       'v' },
+	{ NULL,       NULL,   "diary",        0,            1,           -1,       'd' },
+	{ NULL,       NULL,   "calculator",   0,            1,           -1,       'c' },
 };
 
 /* layout(s) */
@@ -70,14 +72,19 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char scratchpadname[] = "scratchpad";
 /*First arg only serves to match against key in rules*/
 static const char *scratchpadcmd[] = {"s", "st", "-t", "scratchpad", NULL}; 
+static const char *vimwikicmd[] = {"v", "st", "-t", "vimwiki", "-e", "nvim", "/home/wk/vimwiki/index.wiki", NULL}; 
+static const char *diarycmd[] = {"d", "st", "-t", "diary", "-e", "nvim", "-c", ":VimwikiMakeDiaryNote", NULL}; 
+static const char *calccmd[] = {"c", "st", "-t", "calculator", "-e", "bc", "-lq", NULL}; 
 
 static Key keys[] = {
 	/* modifier                        key            function        argument */
-	{ MODKEY,                          XK_p,          spawn,          {.v = dmenucmd } },
-	{ MODKEY,                          XK_grave,      togglescratch,  {.v = scratchpadcmd } },
-	{ MODKEY,                          XK_b,          togglebar,      {0} },
+	{ MODKEY,                          XK_grave,      togglescratch,  {.v = vimwikicmd } },
+	{ MODKEY|ShiftMask,                XK_p,          togglescratch,  {.v = diarycmd } },
+	{ MODKEY|ShiftMask,                XK_t,          togglescratch,  {.v = scratchpadcmd } },
+	{ MODKEY|ShiftMask,                XK_a,          togglescratch,  {.v = calccmd } },
 	{ MODKEY|ShiftMask,                XK_j,          rotatestack,    {.i = +1 } },
 	{ MODKEY|ShiftMask,                XK_k,          rotatestack,    {.i = -1 } },
 	{ MODKEY,                          XK_j,          focusstack,     {.i = +1 } },
